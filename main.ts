@@ -1,35 +1,43 @@
 import { App, Modal, Notice, Plugin, PluginSettingTab, Setting } from "obsidian";
 
-interface ElimuhubPluginSettings {
+interface SamplePluginSettings {
   mySetting: string;
 }
 
-const DEFAULT_SETTINGS: ElimuhubPluginSettings = {
+const DEFAULT_SETTINGS: SamplePluginSettings = {
   mySetting: "default"
 };
 
-export default class ElimuhubPlugin extends Plugin {
-  settings: ElimuhubPluginSettings;
+export default class SamplePlugin extends Plugin {
+  settings: SamplePluginSettings;
 
   async onload() {
     await this.loadSettings();
 
     // Ribbon Icon
-    this.addRibbonIcon("graduation-cap", "Elimuhub AI Plugin", () => {
-      new Notice("Welcome to Elimuhub's AI-powered learning tools!");
+    this.addRibbonIcon("dice", "Sample Plugin", () => {
+      new Notice("This is a notice from the sample plugin!");
     });
 
-    // Command Examples
+    // Command
     this.addCommand({
       id: "open-sample-modal",
       name: "Open Sample Modal",
       callback: () => {
-        new ElimuhubModal(this.app).open();
+        new SampleModal(this.app).open();
       }
     });
 
     // Settings Tab
-    this.addSettingTab(new ElimuhubSettingTab(this.app, this));
+    this.addSettingTab(new SampleSettingTab(this.app, this));
+
+    // Global Click Event
+    this.registerDomEvent(document, "click", () => {
+      console.log("click");
+    });
+
+    // Global Interval
+    this.registerInterval(window.setInterval(() => console.log("setInterval"), 5 * 60 * 1000));
   }
 
   onunload() {}
@@ -43,35 +51,40 @@ export default class ElimuhubPlugin extends Plugin {
   }
 }
 
-class ElimuhubModal extends Modal {
+class SampleModal extends Modal {
   constructor(app: App) {
     super(app);
   }
+
   onOpen() {
-    this.contentEl.setText("Welcome to Elimuhub's AI tools for educators and parents!");
+    this.contentEl.setText("Wow! This is a modal window");
   }
+
   onClose() {
     this.contentEl.empty();
   }
 }
 
-class ElimuhubSettingTab extends PluginSettingTab {
-  plugin: ElimuhubPlugin;
+class SampleSettingTab extends PluginSettingTab {
+  plugin: SamplePlugin;
 
-  constructor(app: App, plugin: ElimuhubPlugin) {
+  constructor(app: App, plugin: SamplePlugin) {
     super(app, plugin);
     this.plugin = plugin;
   }
+
   display(): void {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h2", { text: "Elimuhub AI Plugin Settings" });
+
+    containerEl.createEl("h2", { text: "Settings for Sample Plugin." });
+
     new Setting(containerEl)
       .setName("Setting #1")
-      .setDesc("Custom setting for Elimuhub plugin")
+      .setDesc("It's a secret")
       .addText(text =>
         text
-          .setPlaceholder("Enter value")
+          .setPlaceholder("Enter your secret")
           .setValue(this.plugin.settings.mySetting)
           .onChange(async (value) => {
             this.plugin.settings.mySetting = value;
