@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "strict": true,
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "outDir": "./",
+    "sourceMap": true,
+    "types": ["obsidian"]
+  },
+  "include": ["main.ts"]
+}
