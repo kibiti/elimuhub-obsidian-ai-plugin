@@ -37,4 +37,8 @@ A plugin and template suite for Obsidian, empowering Kenyan educators, parents, 
 
 ## License
 
-0BSD
+0BSD License
+
+Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE.
