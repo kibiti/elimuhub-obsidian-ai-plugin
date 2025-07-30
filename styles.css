@@ -1,0 +1,9 @@
+/* Sample CSS for the plugin */
+:root {
+  --sample-plugin-color: #663399;
+}
+
+.my-sample-class {
+  color: var(--sample-plugin-color);
+  font-weight: bold;
+}
